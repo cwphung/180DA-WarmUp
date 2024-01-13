@@ -5,3 +5,4 @@ Task 4:
 1. Thresholding HSV performs better than thresholding RGB. This is because HSV compares the hue of the object to similar hues while RGB compares the individual intensities of the red/green/blue components. The hue threshold range has a width of 20 on a scale of 0-255.
 2. The tracking ability diminishes as the lighting increases because the image becomes less saturated and it is harder to differentiate colors.
 3. Increasing phone brightness makes it harder for the code to track the color on the phone screen.
+4. The phone is more robust to changes in brightness because the phone itself is emitting light while the non-phone object is reflecting surrounding light.
