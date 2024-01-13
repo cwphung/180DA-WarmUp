@@ -14,7 +14,6 @@ while(True):
 
     # Our operations on the frame come here
     hsvFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
     lowerGreenHsv = np.array([50, 50, 50])
     upperGreenHsv = np.array([70, 255, 255])
     mask = cv2.inRange(hsvFrame, lowerGreenHsv, upperGreenHsv)
