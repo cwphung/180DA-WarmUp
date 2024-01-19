@@ -1,0 +1,7 @@
+1. MQTT makes it possible for users to broadcast a message to many other users on a single network. The challenges with MQTT are knowing which user sent a particular message and storing a message on the broadcast. Messages will not linger in the network; if a user misses when the message was broadcasted, they will never hear it unless it is broadcasted again. If I were using MQTT, a reasonable communications lag time would be around 0.5s. I would prefer using a different method of transmitting data that allows data to sit on the network and be accessed at any time.
+
+2.
+a) Our project can use speech recognition to input commands for the game (e.g. left, right, up, down)
+b) OUr speech recognition system should be simple as the game only takes simple one button commands. It would be difficult to process a string of commands or set of commands run together at the same time.
+c) If we are using a turn based game, we do not need quick recognition because there is no time pressure to execute a move. However, a real-time game where the user reacts to situations would require quick accurate processing.
+d) The environment should ideally be quiet and the user should have a high quality microphone in order for the system to perform optimally. However, it may be possible to achieve adequate performance in a noisy environment with a suboptimal microphone if the words we are looking for are simple enough and sound different from each other.

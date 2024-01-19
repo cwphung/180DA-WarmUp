@@ -66,7 +66,7 @@ def recognize_speech_from_mic(recognizer, microphone):
 
 if __name__ == "__main__":
     # set the list of words, maxnumber of guesses, and prompt limit
-    WORDS = ["apple", "banana"]
+    WORDS = ["up", "down", "left", "right"]
     NUM_GUESSES = 3
     PROMPT_LIMIT = 5
 
@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     # show instructions and wait 3 seconds before starting the game
     print(instructions)
-    time.sleep(3)
+    time.sleep(2)
 
     for i in range(NUM_GUESSES):
         # get the guess from the user
