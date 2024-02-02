@@ -3,10 +3,14 @@ import paho.mqtt.client as mqtt
 import time
 
 userMoves = {}
+userMoves["turner"] = 0
+userMoves["corwin"] = 0
 userPlayed = {}
 userPlayed["turner"] = 0
 userPlayed["corwin"] = 0
 userWins = {}
+userWins["turner"] = 0
+userWins["corwin"] = 0
 
 # 0. define callbacks - functions that run when events happen.
 # The callback for when the client receives a CONNACK response from the server.
@@ -65,17 +69,18 @@ while(True):
         time.sleep(0.1)
     if (userPlayed["turner"] == 1 and userPlayed["corwin"] == 1):
         client.publish("ece180d/test/ahh/server", ('Turner' + getmove(userMoves["turner"])), qos=1)
+        time.sleep(0.1)
         client.publish("ece180d/test/ahh/server", ('Corwin' + getmove(userMoves["corwin"])), qos=1)
         if ((userMoves["turner"]==userMoves["corwin"]+1)or(userMoves["turner"]==1 and userMoves["corwin"]==3)):
             client.publish("ece180d/test/ahh/server", ('Turner wins!'), qos=1)
             userWins["turner"] += 1
         elif (userMoves["turner"]==userMoves["corwin"]):
-            client.publish("ece180d/test/ahh/server", ('Tie'), qos=1)
+            client.publish("ece180d/test/ahh/server", ('Tie!'), qos=1)
         else:
             client.publish("ece180d/test/ahh/server", ('Corwin wins'), qos=1)
             userWins["corwin"] += 1
-        client.publish("ece180d/test/ahh/server", ('Turner total wins: ' + userWins["turner"]), qos=1)
-        client.publish("ece180d/test/ahh/server", ('Corwin total wins: ' + userWins["corwin"]), qos=1)
+        client.publish("ece180d/test/ahh/server", ('Turner total wins: ' + str(userWins["turner"])), qos=1)
+        client.publish("ece180d/test/ahh/server", ('Corwin total wins: ' + str(userWins["corwin"])), qos=1)
         userPlayed["turner"] = 0
         userPlayed["corwin"] = 0
         

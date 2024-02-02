@@ -1,6 +1,19 @@
 import numpy as np
 import paho.mqtt.client as mqtt
 import time
+import pygame
+
+from pygame.locals import (
+    K_UP,
+    K_DOWN,
+    K_LEFT,
+    K_RIGHT,
+    K_ESCAPE,
+    KEYDOWN,
+    QUIT,
+)
+pygame.init()
+screen = pygame.display.set_mode([500, 500])
 
 # 0. define callbacks - functions that run when events happen.
 # The callback for when the client receives a CONNACK response from the server.
@@ -23,8 +36,26 @@ def on_message(client, userdata, message):
     topics = message.topic.split('/')
     if topics[-1] == 'server':
         print(str(message.payload))
-        if (message.payload == 'Users play Rock (1), Paper (2), or Scissors (3)'):
-            move = input()
+        if (str(message.payload) == 'b\'Users play Rock (1), Paper (2), or Scissors (3)\''):
+            move = 0
+            while not(move=='1' or move=='2' or move=='3'):
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_LEFT]:
+                    move=1
+                if keys[pygame.K_RIGHT]:
+                    move=2
+                if keys[pygame.K_UP]:
+                    move=3
+
+                # for event in events:
+                #     if event.type == KEYDOWN:
+                #         if event.key == K_UP:
+                #             move = 1
+                #         if event.key == K_LEFT:
+                #             move = 2
+                #         if event.key == K_RIGHT:
+                #             move = 3
+            print('move transmitted, waiting for other player...')
             client.publish("ece180d/test/ahh/corwin", str(move), qos=1)
 
 # 1. create a client instance.
@@ -43,8 +74,13 @@ client.connect_async('mqtt.eclipseprojects.io')
 # 3. call one of the loop*() functions to maintain network traffic flow with the broker.
 client.loop_start()
 # client.loop_forever()
-while(True):
-    pass
+running = True
+while(running):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.fill((255, 255, 255))
+    pygame.display.flip()
 # use subscribe() to subscribe to a topic and receive messages.
 # use publish() to publish messages to the broker.
 # use disconnect() to disconnect from the broker.
