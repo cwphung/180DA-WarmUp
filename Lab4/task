@@ -1,0 +1,2 @@
+3. The results of running the MQTT script on the RasPi are the same as in Lab 2 because the RasPi has its own OS and is capable of running high level software (e.g. python).
+NOTE: I did not complete the gesture classification task in this lab because I do not have a gyroscope breakout module for my Raspberry Pi 3.
