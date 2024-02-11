@@ -1,3 +1,7 @@
+"""
+The baseline script was used without improvements.
+"""
+
 import paho.mqtt.client as mqtt
 import time
 
